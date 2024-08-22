@@ -1,0 +1,24 @@
+<?php
+   $x = "xin chao";
+  echo "so ky tu :" .strlen($x) . '<br>';
+  
+  echo "so tu :" .str_word_count($x) . '<br>';
+ 
+  echo "daonguoc :" .strrev($x) . '<br>';
+
+  echo "chuoicon :" .strpos($x, "xin") . '<br>';
+   
+  echo "thay the world :" .str_replace("xin",'chao', $x) . '<br>';
+  
+  echo "thay th:" .strncmp('xni',$x,3) . '<br>';
+
+  echo "thay th:" .strtoupper($x) . '<br>';
+  echo "thay th:" .strtolower($x) . '<br>';
+  echo "thay th:" .ucwords($x) . '<br>';
+  echo "thay th:" .trim($x,'xin al') . '<br>';
+  echo "thay th:" .ltrim($x,'x') . '<br>';
+  echo "thay th:" .rtrim($x,'o') . '<br>';
+   echo "thay th:" .explode('xni',$x,1) . '<br>';
+  echo "thay th:" .implode('xni',$x,1) . '<br>';
+ 
+ ?>
