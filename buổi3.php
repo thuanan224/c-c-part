@@ -143,6 +143,35 @@ else{
 		echo "phương trình có hai nghiệm là $x1 , $x2 ";
 	}
 	}
+//kiểm tra một số là số chẵn hãy lẻ
+$so= 5;
+function kiemTraChanLe($so) {
+    if ($so % 2 == 0) {
+        return "Số $so là số chẵn.";
+    } else {
+        return "Số $so là số lẻ.";
+    }
+}
+echo kiemtrachanle($so);
+//tính điểm để xếp hạng học lực
+$giuaky= 8;
+$cuoiky=8;
+function diemthi($giuaky,$cuoiky){
+$diemtrungbinh = ($giuaky * 0.3) +($cuoiky * 0.7 );
+return $diemtrungbinh;
+$diemtrungbinh= diemthi($giuaky,$cuoiky);
+echo " diểm trung bình là:  $diemtrungbinh";
+if ($diemtrungbinh >= 9){
+	echo " hạng xuất sắc";}
+elseif ($diemtrungbinh>=7){
+	echo " hạng giỏigiỏi";
+}elseif ($diemtrungbinh>=5){
+	echo " hạng khá";
+}else {
+	echo " hạng yếu ";
+}
+}
+
 
  ?>
 
