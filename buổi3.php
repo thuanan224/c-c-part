@@ -158,7 +158,7 @@ $giuaky= 8;
 $cuoiky=8;
 function diemthi($giuaky,$cuoiky){
 $diemtrungbinh = ($giuaky * 0.3) +($cuoiky * 0.7 );
-return $diemtrungbinh;
+return $diemtrungbinh;}
 $diemtrungbinh= diemthi($giuaky,$cuoiky);
 echo " diểm trung bình là:  $diemtrungbinh";
 if ($diemtrungbinh >= 9){
