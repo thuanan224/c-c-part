@@ -1,0 +1,107 @@
+<?php 
+// câu 1 kiểm tra một số chẵn lẻ
+$so= 5;
+function kiemTraChanLe($so) {
+    if ($so % 2 == 0) {
+        return "Số $so là số chẵn.";
+    } else {
+        return "Số $so là số lẻ.";
+    }
+}
+echo kiemtrachanle($so);
+//câu 2 tính điểm để xếp hạng học lực
+$giuaky= 8;
+$cuoiky=8;
+function diemthi($giuaky,$cuoiky){
+$diemtrungbinh = ($giuaky * 0.3) +($cuoiky * 0.7 );
+return $diemtrungbinh;}
+$diemtrungbinh= diemthi($giuaky,$cuoiky);
+echo " đđiểm trung bình là:  $diemtrungbinh";
+if ($diemtrungbinh >= 9){
+	echo " hạng xuất sắc";}
+elseif ($diemtrungbinh>=7){
+	echo " hạng giỏi    ";
+}elseif ($diemtrungbinh>=5){
+	echo " hạng khá";
+}else {
+	echo " hạng yếu ";}
+// câu 3 kiểm tra năm nay là chẵn hay lẻ 
+$year = date("2020");
+if ($year %2==0){
+	echo" // Năm $year là năm chẵn .//";
+}else{
+	echo" //  Năm $year là năm lẻ .//";
+}
+//câu 4 dùng for để in ra số từ 1-100
+for ($x=1;$x<10;$x++){
+echo " $x ";}
+
+// câu 5 in ra 1-100 in đậm số chẵn, in thường số lẻ
+for($x=1;$x<=100;$x++){
+	if($x%2==0){
+		echo" <b>$x<b>";// in ra số chẵn
+	}else{
+		echo " $x ";// in ra số lẻ
+	}
+}
+// câu 6 in ra các năm trong mảng có sẵn 
+$nam= array(1990,1991,1992,1993,1994,1995);
+foreach ( $nam as $year){
+echo " Năm: $year \n";
+}
+
+// tạo ra hình hộp chữ nhật có cạnh bằng 7 và 5
+$chieurong=5;
+	$chieucao=7;
+function inHinhChuNhatRong($chieuRong, $chieuCao) {
+    for ($i = 0; $i < $chieuCao; $i++) {
+        if ($i == 0 || $i == $chieuCao - 1) {
+            for ($j = 0; $j < $chieuRong; $j++) {
+                echo "* ";
+            }
+        } else {
+            // In hàng ở giữa chỉ in dấu sao ở hai bên
+            echo "*";
+            for ($j = 1; $j < $chieuRong - 1; $j++) {
+                echo " "; // Khoảng trắng để tạo khoảng trống rỗng
+            }
+            echo "*";
+        }
+        echo "\n";
+    }}
+    // Gọi hàm với kích thước 5x7
+inHinhChuNhatRong(7, 5);
+echo"â\n";
+echo"********\n";
+echo"*      *\n";
+echo"*      *\n";
+echo"*      *\n";
+echo"********\n";
+
+
+function inHinhHopChuNhatRong($chieuRong, $chieuCao) {
+    // Duyệt qua từng hàng
+    for ($i = 0; $i < $chieuCao; $i++) {
+        // Nếu là hàng đầu tiên hoặc hàng cuối cùng thì in ra toàn dấu *
+        if ($i == 0 || $i == $chieuCao - 1) {
+            for ($j = 0; $j < $chieuRong; $j++) {
+                echo "*";
+            }
+        } else {
+            // Các hàng giữa thì in dấu * ở đầu và cuối, còn ở giữa là dấu cách
+            echo "*"; // dấu * ở đầu hàng
+            for ($j = 1; $j < $chieuRong - 1; $j++) {
+                echo " "; // khoảng trống
+            }
+            echo "*"; // dấu * ở cuối hàng
+        }
+        // Xuống dòng sau khi in xong một hàng
+        echo "\n";
+    }
+}
+
+// Gọi hàm in hình hộp chữ nhật với chiều rộng là 8 và chiều cao là 5
+inHinhHopChuNhatRong(8, 5);
+	?>
+
+	
