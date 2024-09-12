@@ -1,0 +1,197 @@
+
+<?php
+// Kết nối tới MySQL
+$dbh = mysqli_connect('localhost', 'root', '', 'my_personal_contacts');
+
+// Kiểm tra kết nối
+if (!$dbh) {
+    die("Unable to connect to MySQL: " . mysqli_connect_error());
+}
+
+// Thêm dữ liệu vào bảng
+$full_names = "Hades";
+$gender = "Male";
+$contact_no = "555";
+$email = "hades@olympus.mt.co";
+$city = "Underworld";
+$country = "Greece";
+$sql_insert = "INSERT INTO my_contacts (full_names, gender, contact_no, email, city, country) 
+               VALUES ('$full_names', '$gender', '$contact_no', '$email', '$city', '$country')";
+if (mysqli_query($dbh, $sql_insert)) {
+    echo "New record inserted successfully!";
+} else {
+    echo "Error: " . mysqli_error($dbh);
+}
+// Đóng kết nối
+mysqli_close($dbh);
+//B
+// Cập nhật thông tin liên lạc cho một bản ghi dựa trên ID
+$update_id = 1; // ID của bản ghi cần cập nhật
+$new_email = "zeus_updated@olympus.mt.co";
+$sql_update = "UPDATE my_contacts SET email='$new_email' WHERE id=$update_id";
+if (mysqli_query($dbh, $sql_update)) {
+    echo "Record updated successfully!";
+} else {
+    echo "Error: " . mysqli_error($dbh);
+}
+// Đóng kết nối
+mysqli_close($dbh);
+
+//C
+// Xóa bản ghi dựa trên ID
+$delete_id = 3; // ID của bản ghi cần xóa
+$sql_delete = "DELETE FROM my_contacts WHERE id=$delete_id";
+if (mysqli_query($dbh, $sql_delete)) {
+    echo "Record deleted successfully!";
+} else {
+    echo "Error: " . mysqli_error($dbh);
+}
+// Đóng kết nối
+mysqli_close($dbh);
+
+//D
+$sql_stmt = "SELECT * FROM my_contacts";
+$result = mysqli_query($dbh, $sql_stmt);
+if (!$result) {
+    die("Database access failed: " . mysqli_error($dbh));
+}
+// Hiển thị dữ liệu
+$rows = mysqli_num_rows($result);
+if ($rows > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo 'ID: ' . $row['id'] . '<br>';
+        echo 'Full Names: ' . $row['full_names'] . '<br>';
+        echo 'Gender: ' . $row['gender'] . '<br>';
+        echo 'Contact No: ' . $row['contact_no'] . '<br>';
+        echo 'Email: ' . $row['email'] . '<br>';
+        echo 'City: ' . $row['city'] . '<br>';
+        echo 'Country: ' . $row['country'] . '<br><br>';
+    }
+} else {
+    echo "No records found in the my_contacts table.";
+}
+// Đóng kết nối
+mysqli_close($dbh);
+
+//14A
+try {
+    // Kết nối tới MySQL bằng PDO
+    $dbh = new PDO('mysql:host=localhost;dbname=my_personal_contacts', 'root', '');
+    // Thiết lập chế độ báo lỗi
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Câu lệnh SQL để thêm dữ liệu
+    $sql_insert = "INSERT INTO my_contacts (full_names, gender, contact_no, email, city, country) 
+                   VALUES (:full_names, :gender, :contact_no, :email, :city, :country)";
+    // Chuẩn bị câu lệnh
+    $stmt = $dbh->prepare($sql_insert);
+    // Gán giá trị cho các tham số
+    $stmt->bindParam(':full_names', $full_names);
+    $stmt->bindParam(':gender', $gender);
+    $stmt->bindParam(':contact_no', $contact_no);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':city', $city);
+    $stmt->bindParam(':country', $country);
+    // Gán giá trị
+    $full_names = "Apollo";
+    $gender = "Male";
+    $contact_no = "999";
+    $email = "apollo@olympus.mt.co";
+    $city = "Delphi";
+    $country = "Greece";
+    // Thực thi câu lệnh
+    $stmt->execute();
+    echo "New record inserted successfully!"; 
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+// Đóng kết nối
+$dbh = null;
+
+//14B
+try {
+    // Kết nối tới MySQL bằng PDO
+    $dbh = new PDO('mysql:host=localhost;dbname=my_personal_contacts', 'root', '');
+    // Thiết lập chế độ báo lỗi
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+    // Câu lệnh SQL để cập nhật dữ liệu
+    $sql_update = "UPDATE my_contacts SET email = :email WHERE id = :id";
+    // Chuẩn bị câu lệnh
+    $stmt = $dbh->prepare($sql_update);  
+    // Gán giá trị cho các tham số
+    $stmt->bindParam(':email', $new_email);
+    $stmt->bindParam(':id', $update_id);
+    // Gán giá trị
+    $new_email = "apollo_updated@olympus.mt.co";
+    $update_id = 5; // ID của bản ghi cần cập nhật
+    // Thực thi câu lệnh
+    $stmt->execute();
+    echo "Record updated successfully!"; 
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+// Đóng kết nối
+$dbh = null;
+//14C
+
+try {
+    // Kết nối tới MySQL bằng PDO
+    $dbh = new PDO('mysql:host=localhost;dbname=my_personal_contacts', 'root', '');
+    
+    // Thiết lập chế độ báo lỗi
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Câu lệnh SQL để xóa dữ liệu
+    $sql_delete = "DELETE FROM my_contacts WHERE id = :id";
+    
+    // Chuẩn bị câu lệnh
+    $stmt = $dbh->prepare($sql_delete);
+    
+    // Gán giá trị cho tham số
+    $stmt->bindParam(':id', $delete_id);
+    
+    // Gán giá trị
+    $delete_id = 5; // ID của bản ghi cần xóa
+    
+    // Thực thi câu lệnh
+    $stmt->execute();
+    
+    echo "Record deleted successfully!";
+    
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+// Đóng kết nối
+$dbh = null;
+//14D
+try {
+    // Kết nối tới MySQL bằng PDO
+    $dbh = new PDO('mysql:host=localhost;dbname=my_personal_contacts', 'root', '');
+    
+    // Thiết lập chế độ báo lỗi
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Câu lệnh SQL để truy vấn dữ liệu
+    $sql_select = "SELECT * FROM my_contacts";
+    
+    // Chuẩn bị và thực thi câu lệnh
+    $stmt = $dbh->query($sql_select);
+    
+    // Duyệt qua kết quả và hiển thị dữ liệu
+    foreach ($stmt as $row) {
+        echo 'ID: ' . $row['id'] . '<br>';
+        echo 'Full Names: ' . $row['full_names'] . '<br>';
+        echo 'Gender: ' . $row['gender'] . '<br>';
+        echo 'Contact No: ' . $row['contact_no'] . '<br>';
+        echo 'Email: ' . $row['email'] . '<br>';
+        echo 'City: ' . $row['city'] . '<br>';
+        echo 'Country: ' . $row['country'] . '<br><br>';
+    }
+    
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+// Đóng kết nối
+$dbh = null;
+?>
